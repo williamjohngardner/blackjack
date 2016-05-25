@@ -1,16 +1,13 @@
-class Deck_of_Cards:
+class DeckOfCards:
+
+    from card import Card
+    deck = Card()
 
     def __init__(self):
         pass
-        # num_cards = 52
-        # num_suits = 13
-        # num_value = 4
 
-    def deal_cards(self):
+    def shuffle_deck(self):
         pass
-        # random number in range to determine dealt cards
 
-    def shuffle_cards(self):
+    def deal_hand(self):
         pass
-        # reset random number counter?
-
