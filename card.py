@@ -8,8 +8,9 @@ class Card:
     def build_deck(self):
         for suit in self.suits:
             for card in self.cards:
-                self.deck.append(card + " " + suit)
+                    self.deck.append(card + " " + suit)
         return self.deck
+
 '''
 deck = Card()
 deck.build_deck()
