@@ -6,6 +6,11 @@ class Card:
         self.deck = []
 
     def build_deck(self):
-        for self.suit in self.suits:
-            for self.card in self.cards:
-                self.deck.append(self.suit + " " + self.card)
+        for suit in self.suits:
+            for card in self.cards:
+                self.deck.append(suit + " " + card)
+
+deck = Card()
+deck.build_deck()
+# print(deck.deck)
+
