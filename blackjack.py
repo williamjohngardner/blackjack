@@ -1,7 +1,6 @@
 # BLACKJACK GAME by Bill Gardner
 
 from hand import Hand
-from functions import hit_stand
 
 print("*****************************" +
       "\n*****************************" +
@@ -15,6 +14,8 @@ num_cards_dealt = 2
 max_cards_in_hand = 5
 player = []
 dealer = []
+h = ""
+s = ""
 
 
 # start = input("Press Enter To Start")
@@ -29,7 +30,17 @@ print(player_card_2)
 print(player)
 
 while len(player) < max_cards_in_hand:
-    hit_stand()
-    player.append(hit_stand)
-    print(player)
+    choice = input("Would you like to Hit or Stand? H or S: ").lower()
+    if choice == h:
+        player_card = hand.deal(False)
+        player.append(player_card)
+        print(player)
+        continue
+    else:
+        # This will move to the dealer's turn
+        break
+
+
+
+
 

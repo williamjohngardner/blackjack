@@ -11,7 +11,7 @@ def hit_stand():
     choice = input("Would you like to Hit or Stand? H or S: ").lower()
 
     if choice == h:
-        player_card = hand.deal(False)
-        return player_card
-    elif choice == s:
-        pass  # This will move to the dealer's turn
+        card = hand.deal(False)
+        return card
+    # elif choice == s:
+    #     pass  # This will move to the dealer's turn
