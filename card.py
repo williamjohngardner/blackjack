@@ -9,8 +9,10 @@ class Card:
         for suit in self.suits:
             for card in self.cards:
                 self.deck.append(suit + " " + card)
-
+        return self.deck
+'''
 deck = Card()
 deck.build_deck()
-# print(deck.deck)
+print(deck.deck)
+'''
 

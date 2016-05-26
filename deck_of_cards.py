@@ -6,7 +6,7 @@ from random import choice
 class DeckOfCards:
 
     def __init__(self):
-        self.deck = Card()
+        self.deck = Card().build_deck()
         self.shuffle = []
         self.hand = []
         self.dealt_card = ""
@@ -20,9 +20,10 @@ class DeckOfCards:
         for card in self.deck:
             self.dealt_card = choice(self.deck)
         return self.dealt_card
-
+'''
 deck = DeckOfCards()
 deck.shuffle_deck()
 deck.deal_hand()
-print(deck.dealt_card)
 # print(deck.dealt_card)
+# print(deck.dealt_card)
+'''
