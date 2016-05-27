@@ -12,7 +12,6 @@ hand = DeckOfCards()
 max_cards_in_hand = 5
 player = []
 dealer = []
-dealer_hand = []
 face_cards = ["1", "J", "Q", "K"]
 number_cards = "23456789"
 
@@ -47,7 +46,7 @@ while len(player) < max_cards_in_hand:
                 hand_value.append(10)
             elif card[0] in number_cards:
                 hand_value.append(int(card[0]))
-            elif card[0] == "A":
+            elif card[0] == "A":  # This logic is not yet bullet proof.  It needs to change based on the changing total.
                 if sum(hand_value) <= 10:
                     hand_value.append(11)
                 else:
@@ -66,14 +65,50 @@ while len(player) < max_cards_in_hand:
             exit()
     else:
         break
+dealer_start_value = []
+dealer_hand_value = []
 
-'''
+for card in dealer:
+    if card[0] in face_cards:
+        dealer_start_value.append(10)
+    elif card[0] in number_cards:
+        dealer_start_value.append(int(card[0]))
+    elif card[0] == "A":  # This logic is not yet bullet proof.  It needs to change based on the changing total.
+        if sum(dealer_start_value) <= 10:
+            dealer_start_value.append(11)
+        else:
+            dealer_start_value.append(1)
+    else:
+        dealer_start_value.append('#')
+
+dealer_hand_value = sum(dealer_start_value)
+
+
 while len(dealer) < max_cards_in_hand:
-    if sum(dealer) < 21:
-        dealer_card = hand.deal_hand(False)
-        dealer.append(dealer_card)
+    if dealer_hand_value <= 17:
+        new_card = hand.deal_hand(False)
+        dealer.append(new_card)
+        for card in dealer:
+            if card[0] in face_cards:
+                dealer_hand_value.append(10)
+            elif card[0] in number_cards:
+                dealer_hand_value.append(int(card[0]))
+            elif card[0] == "A":  # This logic is not yet bullet proof.  It needs to change based on the changing total.
+                if sum(dealer_hand_value) <= 10:
+                    dealer_hand_value.append(11)
+                else:
+                    dealer_hand_value.append(1)
+            else:
+                dealer_hand_value.append('#')
         print(dealer)
-        continue
+        print(dealer_hand_value, str(sum(dealer_hand_value)))
+
+        if sum(dealer_hand_value) <= 17:
+            continue
+        elif sum(dealer_hand_value) == 21:
+            break
+        elif sum(hand_value) > 21:
+            print("\nDEALER BUSTED!!!  YOU WIN!!!")
+            exit()
     else:
         break
-'''
