@@ -11,12 +11,10 @@ print("*****************************" +
 hand = DeckOfCards()
 max_cards_in_hand = 5
 player = []
-player_hand = []
 dealer = []
 dealer_hand = []
 face_cards = ["1", "J", "Q", "K"]
-number_cards = ["2", "3", "4", "5", "6", "7", "8", "9"]
-
+number_cards = "23456789"
 
 # start = input("Press Enter To Start")
 
@@ -39,23 +37,33 @@ print(dealer_card_2)
 print("dealer" + str(dealer))
 
 while len(player) < max_cards_in_hand:
+    hand_value = []
     choice = input("Would you like to Hit or Stand? H or S: ").lower()
     if choice == "h":
-        player_card = hand.deal_hand(False)
-        player.append(player_card)
+        new_card = hand.deal_hand(False)
+        player.append(new_card)
         for card in player:
             if card[0] in face_cards:
-                player_hand.append(10)
+                hand_value.append(10)
             elif card[0] in number_cards:
-                player_hand.append(5)
+                hand_value.append(int(card[0]))
             elif card[0] == "A":
-                player_hand.append(11)  # or 1!!!
+                if sum(hand_value) <= 10:
+                    hand_value.append(11)
+                else:
+                    hand_value.append(1)
             else:
-                player_hand.append(15)
-
+                hand_value.append('#')
         print(player)
-        print(player_hand)
-        continue
+        print(hand_value, str(sum(hand_value)))
+
+        if sum(hand_value) < 21:
+            continue
+        elif sum(hand_value) == 21:
+            break
+        elif sum(hand_value) > 21:
+            print("\nGAME OVER! YOU'VE BUSTED!")
+            exit()
     else:
         break
 
