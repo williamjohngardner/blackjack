@@ -14,6 +14,8 @@ player = []
 player_hand = []
 dealer = []
 dealer_hand = []
+face_cards = ["1", "J", "Q", "K"]
+number_cards = ["2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 # start = input("Press Enter To Start")
@@ -32,7 +34,7 @@ print(player_card_1)
 print(player_card_2)
 print("player" + str(player))
 
-print("\n"+ str(dealer_card_1))
+print("\n" + str(dealer_card_1))
 print(dealer_card_2)
 print("dealer" + str(dealer))
 
@@ -41,12 +43,17 @@ while len(player) < max_cards_in_hand:
     if choice == "h":
         player_card = hand.deal_hand(False)
         player.append(player_card)
-        if player_card == ("10", "J", "Q", "K"):
-            player_hand.append(10)
-        elif player_card == ["2", "3", "4", "5", "6", "7", "8", "9"]:
-            player_hand.append(int(player_card))
-        else:
-            player_hand.append(11) # or 1!!!
+        for card in player:
+            if card[0] in face_cards:
+                player_hand.append(10)
+            elif card[0] in number_cards:
+                player_hand.append(5)
+            elif card[0] == "A":
+                player_hand.append(11)  # or 1!!!
+            else:
+                player_hand.append(15)
+
+        print(player)
         print(player_hand)
         continue
     else:
