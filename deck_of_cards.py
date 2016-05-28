@@ -9,7 +9,7 @@ class DeckOfCards:
         self.deck = Card().build_deck()
         self.shuffle = []
         self.hand = []
-        self.dealt_card = ""
+        self.dealt_card = []
 
     def shuffle_deck(self):
         self.deck = [[i] for i in range(52)]
@@ -18,8 +18,7 @@ class DeckOfCards:
 
     def deal_hand(self, hide=False):
         if hide:
-            for card in self.deck:
-                self.dealt_card = choice(self.deck)
+            self.dealt_card = choice(self.deck)
             return self.dealt_card
         else:
             return " _ "
