@@ -1,6 +1,7 @@
 # BLACKJACK GAME by Bill Gardner
 
 from deck_of_cards import DeckOfCards
+from hand import Player
 
 print("*****************************" +
       "\n*****************************" +
@@ -14,59 +15,85 @@ player = []
 dealer = []
 face_cards = ["1", "J", "Q", "K"]
 number_cards = "23456789"
+############# variables above will probably go away
+players = Player()
+
 
 # start = input("Press Enter To Start")
+players.player_deal()
+players.dealer_deal()
 
+'''
 player_card_1 = hand.deal_hand(False)
 player_card_2 = hand.deal_hand(False)
-dealer_card_1 = hand.deal_hand(False)
+dealer_card_1 = hand.deal_hand(False)  # Don't forget to change this to True when the game is complete
 dealer_card_2 = hand.deal_hand(False)
+'''
 
-player.append(player_card_1)
-player.append(player_card_2)
-dealer.append(dealer_card_1)
-dealer.append(dealer_card_2)
+player.append(players.player_deal())
+dealer.append(players.dealer_deal())
+'''
+player_start_value = []
+
+for card in player:
+    if card[0] in face_cards:
+        player_start_value.append(10)
+    elif card[0] in number_cards:
+        player_start_value.append(int(card[0]))
+    elif card[0] == "A":  # This logic is not yet bullet proof.  It needs to change based on the changing total.
+        if sum(player_start_value) <= 10:
+            player_start_value.append(11)
+        else:
+            player_start_value.append(1)
+    elif sum(player_start_value) == 21:
+        print("\nYOU HIT 21!!!  YOU WIN!!!")
+        exit()
+'''
+
+players.player_start_value()
 
 print(player_card_1)
 print(player_card_2)
-print("player" + str(player))
-
-print("\n" + str(dealer_card_1))
+print("player", player)
+print("\n")
+print(dealer_card_1)
 print(dealer_card_2)
-print("dealer" + str(dealer))
+print("dealer", dealer)
 
+'''
 while len(player) < max_cards_in_hand:
-    hand_value = []
+    hand_value = 0
     choice = input("Would you like to Hit or Stand? H or S: ").lower()
     if choice == "h":
         new_card = hand.deal_hand(False)
         player.append(new_card)
         for card in player:
             if card[0] in face_cards:
-                hand_value.append(10)
+                hand_value += 10
             elif card[0] in number_cards:
-                hand_value.append(int(card[0]))
+                hand_value += int(card[0])
             elif card[0] == "A":  # This logic is not yet bullet proof.  It needs to change based on the changing total.
-                if sum(hand_value) <= 10:
-                    hand_value.append(11)
-                else:
-                    hand_value.append(1)
-            else:
-                hand_value.append('#')
+                    hand_value += 11
+            elif player_start_value == 21:
+                print("\nYOU HIT 21!!!  YOU WIN!!!")
+                exit()
         print(player)
-        print(hand_value, str(sum(hand_value)))
+        print(hand_value)
 
-        if sum(hand_value) < 21:
+        if hand_value < 21:
             continue
-        elif sum(hand_value) == 21:
+        elif hand_value == 21:
             break
-        elif sum(hand_value) > 21:
+        elif hand_value > 21:
             print("\nGAME OVER! YOU'VE BUSTED!")
             exit()
     else:
         break
+'''
+players.player_hand()
+
+
 dealer_start_value = []
-dealer_hand_value = []
 
 for card in dealer:
     if card[0] in face_cards:
@@ -78,37 +105,32 @@ for card in dealer:
             dealer_start_value.append(11)
         else:
             dealer_start_value.append(1)
-    else:
-        dealer_start_value.append('#')
-
-dealer_hand_value = sum(dealer_start_value)
+    elif sum(dealer_start_value) == 21:
+        print("\nDEALER HIT 21!!!  DEALER WINS!!! GAME OVER!")
+        exit()
 
 
 while len(dealer) < max_cards_in_hand:
+    dealer_hand_value = 0
     if dealer_hand_value <= 17:
         new_card = hand.deal_hand(False)
         dealer.append(new_card)
         for card in dealer:
             if card[0] in face_cards:
-                dealer_hand_value.append(10)
+                dealer_hand_value += 10
             elif card[0] in number_cards:
-                dealer_hand_value.append(int(card[0]))
+                dealer_hand_value += int(card[0])
             elif card[0] == "A":  # This logic is not yet bullet proof.  It needs to change based on the changing total.
-                if sum(dealer_hand_value) <= 10:
-                    dealer_hand_value.append(11)
-                else:
-                    dealer_hand_value.append(1)
+                dealer_hand_value += 11
             else:
                 dealer_hand_value.append('#')
-        print(dealer)
-        print(dealer_hand_value, str(sum(dealer_hand_value)))
 
-        if sum(dealer_hand_value) <= 17:
+        print(dealer, dealer_hand_value)
+
+        if dealer_hand_value <= 17:
             continue
-        elif sum(dealer_hand_value) == 21:
+        elif dealer_hand_value == 21:
             break
-        elif sum(hand_value) > 21:
+        elif dealer_hand_value > 21:
             print("\nDEALER BUSTED!!!  YOU WIN!!!")
             exit()
-    else:
-        break
