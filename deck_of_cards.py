@@ -17,14 +17,15 @@ class DeckOfCards:
         return self.shuffle
 
     def deal_hand(self, hide=False):
-        if hide == False:
+        if hide:
             for card in self.deck:
                 self.dealt_card = choice(self.deck)
             return self.dealt_card
         else:
             return " _ "
-
+'''
 deck = DeckOfCards()
 deck.shuffle_deck()
 deck.deal_hand()
 print(deck.dealt_card)
+'''
