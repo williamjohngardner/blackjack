@@ -78,22 +78,23 @@ class BlackJack:
             else:
                 break
 
-        dealer_start_value = 0
-
+        dealer_hand_value = 0
+        '''
         for card in dealer:
             if card[0] in face_cards:
-                dealer_start_value +=10
+                dealer_hand_value += 10
             elif card[0] in number_cards:
-                dealer_start_value += int(card[0])
+                dealer_hand_value += int(card[0])
             elif card[0] == "A":
-                if dealer_start_value <= 10:
-                    dealer_start_value += 11
+                if dealer_hand_value <= 10:
+                    dealer_hand_value += 11
                 else:
-                    dealer_start_value += 1
-            elif dealer_start_value == 21:
+                    dealer_hand_value += 1
+            elif dealer_hand_value == 21:
                 break
 
-        dealer_hand_value = dealer_start_value
+        # dealer_hand_value = dealer_start_value
+        '''
 
         while len(dealer) < max_cards_in_hand:
             if 21 >= dealer_hand_value >= 17:
